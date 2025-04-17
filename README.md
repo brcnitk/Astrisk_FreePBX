@@ -37,13 +37,13 @@
 * Edit /etc/default/asterisk file:<br>
     * sudo nano /etc/default/asterisk    
         *   AST_USER="asterisk"
-        *   AST_GROUP="asterisk"
+        *   AST_GROUP="asterisk"<br>
 ![Screenshot from 2025-04-17 12-14-16](https://github.com/user-attachments/assets/86ac5fa3-feaf-4acb-a67c-fbf38e8ce1d1)
         Save and close the file (press ctrl+x then y)<br>
 * Edit etc/asterisk/asterisk.conf file:<br>
     * sudo nano /etc/asterisk/asterisk.conf
         * runuser = asterisk ; The user to run as.
-        * rungroup = asterisk ; The group to run as.
+        * rungroup = asterisk ; The group to run as.<br>
 ![Screenshot from 2025-04-17 13-19-24](https://github.com/user-attachments/assets/60ceeb26-311f-4961-9198-b166a8866b01)
         Save and close the file (press ctrl+x then y)<br>
 * Restart and enable the Asterisk service:<br>
@@ -52,11 +52,11 @@
 * Verify status of Asterisk service:<br>
     * sudo systemctl status asterisk
 * Open Asterisk command-line interface:
-    * sudo asterisk -rvvv
+    * sudo asterisk -rvvv<br>
 ![Screenshot from 2025-04-17 13-25-32](https://github.com/user-attachments/assets/7c7455ea-f874-44db-ac22-c0248e1222a4)
     Varify version 21.7.0
 * Exit CLI:
-    * exit
+    * exit<br>
 ![Screenshot from 2025-04-17 13-27-21](https://github.com/user-attachments/assets/d1c2b462-7954-439c-af58-94ae515a5132)
 
 ### Step 4 – Install FreePBX
@@ -74,7 +74,7 @@ php8.2-mbstring php8.2-intl php8.2-xml php-pear
 * Install Node.js package
     * sudo apt-get install nodejs npm -y
     * sudo ./install -n
-* Get the following output
+* Get the following output<br>
     ![Screenshot from 2025-04-17 13-33-53](https://github.com/user-attachments/assets/63590429-4f9e-4471-aede-346e62723718)
 * Install the pm2 package 
     * sudo fwconsole ma install pm2
@@ -82,8 +82,17 @@ php8.2-mbstring php8.2-intl php8.2-xml php-pear
     * sudo a2enmod rewrite
     * sudo systemctl restart apache2
 ### Step 5 – Access FreePBX
-* Now, open your web browser and access the FreePBX web interface using the URL http://your-server-ip/admin
- 
+* Now, open your web browser and access the FreePBX web interface using the URL http://your-server-ip/admin<br>
+![image](https://github.com/user-attachments/assets/ddce947f-9612-403a-a61e-c93c560fbd15)
+Provide your Admin user details and click on the Setup System button.
+* Should see the following page:<br>
+![image](https://github.com/user-attachments/assets/dea9c6f8-44da-45f7-8ec5-ff0e36d9c99a)
+  Click on the FreePBX Administration button.<br> 
+![image](https://github.com/user-attachments/assets/470b28c7-eca6-4110-83db-de68276facc3)
+  Enter your admin username and password, and click on the Continue button.
+
+
+
 
 
 
