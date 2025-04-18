@@ -1,6 +1,6 @@
 
 
-# VoIP Practical Working
+# VoIP Setup using Asterisk & FreePBX
 
 Voice over Internet Protocol (VoIP) is a technology that allows you to make voice calls using a broadband Internet connection instead of a regular (or analog) phone line. Here’s a practical overview of how VoIP works and its key components:
 
