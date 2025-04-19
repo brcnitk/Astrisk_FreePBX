@@ -40,10 +40,10 @@ Asterisk is an open source  platform for creating communications servers. Asteri
 
 #### Step 2 – Install Asterisk
 * Download version 21:
-    * cd /usr/src <br>
-    * sudo wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-21-current.tar.gz
-    * sudo tar xvf asterisk-21-current.tar.gz
-    * cd asterisk-21*/<br>
+  >  cd /usr/src <br>
+  >  sudo wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-21-current.tar.gz
+    * $ sudo tar xvf asterisk-21-current.tar.gz
+    * $ cd asterisk-21*/<br>
 * Some require dependencies:
     * sudo contrib/scripts/get_mp3_source.sh
     * sudo contrib/scripts/install_prereq install<br>
