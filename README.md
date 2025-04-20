@@ -137,7 +137,7 @@ Provide your Admin user details and click on the Setup System button.<br>
   >  sudo   iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 * set our configs
   >  cd /etc/asterisk
-  >  sudo nano pjsip_custom.conf(This file should be empty, enter this code.)
+  >  sudo nano [pjsip_custom.conf](https://github.com/brcnitk/Astrisk_FreePBX/blob/main/conf%20files/extention_custom.conf)(This file should be empty, enter this code.)
  
            ;================================ TRANSPORTS ==
            ; Our primary transport definition for UDP communication behind NAT.
