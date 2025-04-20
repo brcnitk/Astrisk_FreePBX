@@ -3,7 +3,7 @@
 # VoIP Setup using Asterisk & FreePBX
 ## 1. Introduction of VoIP
 
-Voice over Internet Protocol (VoIP) is a technology that allows us to make calls using a Internet connection instead of a regular phone line. It converts analog voice signals into digital then data packets, which are transmitted over an IP network.
+[Voice over Internet Protocol](https://www.geeksforgeeks.org/voice-over-internet-protocol-voip/) (VoIP) is a technology that allows us to make calls using a Internet connection instead of a regular phone line. It converts analog voice signals into digital then data packets, which are transmitted over an IP network.
 
 ### 1.1 Components of VoIP
 - **IP Phones**: These are specialized phones that connect directly to your Internet connection. They can be hardware-based (similar to traditional phones) or software-based (softphones that run on computers or mobile devices).
@@ -28,61 +28,62 @@ Voice over Internet Protocol (VoIP) is a technology that allows us to make calls
 - **Scalability**: It’s easy to add or remove lines as your business grows or changes.
 - **Advanced Features**: VoIP systems often include features like call forwarding, voicemail-to-email, auto-attendant, and more
 ## 2. Introduction of Astrisk
-Asterisk is an open source  platform for creating communications servers. Asterisk have IP PBX systems, VoIP gateways. It can be used by small businesses, large businesses, call centers, carriers and government agencies, worldwide. Asterisk is free and open source. Asterisk is created by Sangoma. Today, more than one million Asterisk-based communications systems in use, in more than 170 countries.
+[Asterisk](https://www.asterisk.org/get-started/) is an open source  platform for creating communications servers. Asterisk have IP PBX systems, VoIP gateways. It can be used by small businesses, large businesses, call centers, carriers and government agencies, worldwide. Asterisk is free and open source. Asterisk is created by Sangoma. Today, more than one million Asterisk-based communications systems in use, in more than 170 countries.
 
 ### 2.1 Setup Asterisk<br> 
 #### Step 1 – Install Required Dependencies<br> 
 * Before starting, install all required dependencies to compile Asterisk.<br>
 
-    * sudo apt update <br> 
-    * sudo apt upgrade<br> 
-    * sudo apt-get install unzip git sox gnupg2 curl libnewt-dev libssl-dev libncurses5-dev subversion libsqlite3-dev build-essential libjansson-dev libxml2-dev libedit-dev uuid-dev subversion -y<br> (https://www.atlantic.net/vps-hosting/how-to-install-asterisk-and-freepbx-on-ubuntu/)
+  >  sudo apt update <br> 
+  >  sudo apt upgrade<br> 
+  >  sudo apt-get install unzip git sox gnupg2 curl libnewt-dev libssl-dev libncurses5-dev subversion libsqlite3-dev build-essential libjansson-dev libxml2-dev libedit-dev uuid-dev subversion -y<br> (https://www.atlantic.net/vps-hosting/how-to-install-asterisk-and-freepbx-on-ubuntu/)
 
 #### Step 2 – Install Asterisk
 * Download version 21:
   >  cd /usr/src <br>
   >  sudo wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-21-current.tar.gz
-    * $ sudo tar xvf asterisk-21-current.tar.gz
-    * $ cd asterisk-21*/<br>
+  >  sudo tar xvf asterisk-21-current.tar.gz
+  >  cd asterisk-21*/<br>
 * Some require dependencies:
-    * sudo contrib/scripts/get_mp3_source.sh
-    * sudo contrib/scripts/install_prereq install<br>
+  >  sudo contrib/scripts/get_mp3_source.sh
+  >  sudo contrib/scripts/install_prereq install<br>
 * Next, configure Asterisk:<br>
-    * sudo ./configure
-    * sudo make -j2
-    * sudo make install
-    * sudo make samples
-    * sudo make config
-    * sudo ldconfig
+  >  sudo ./configure
+  >  sudo make -j2
+  >  sudo make install
+  >  sudo make samples
+  >  sudo make config
+  >  sudo ldconfig
 #### Step 3 – Configure Asterisk
 * Create a separate user and group for Asterisk.<br>
-    * sudo groupadd asterisk
-    * sudo useradd -r -d /var/lib/asterisk -g asterisk asterisk<br>
+  >  sudo groupadd asterisk
+  >  sudo useradd -r -d /var/lib/asterisk -g asterisk asterisk<br>
 * Add required users to the Asterisk group:<br>
-    * sudo usermod -aG audio,dialout asterisk<br>
+  >  sudo usermod -aG audio,dialout asterisk<br>
 * Set permissions:<br>
-    * sudo chown -R asterisk.asterisk /etc/asterisk
-    * sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk
-    * sudo chown -R asterisk.asterisk /usr/lib/asterisk<br>
+  >  sudo chown -R asterisk.asterisk /etc/asterisk
+  >  sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk
+  >  sudo chown -R asterisk.asterisk /usr/lib/asterisk<br>
 * Edit /etc/default/asterisk file:<br>
-    * sudo nano /etc/default/asterisk    
-        *   AST_USER="asterisk"
-        *   AST_GROUP="asterisk"<br>
+  >  sudo nano /etc/default/asterisk    
+    *   AST_USER="asterisk"
+    *   AST_GROUP="asterisk"<br>
 ![Screenshot from 2025-04-17 12-14-16](https://github.com/user-attachments/assets/86ac5fa3-feaf-4acb-a67c-fbf38e8ce1d1)<br>
         Save and close the file (press ctrl+x then y)<br>
 * Edit etc/asterisk/asterisk.conf file:<br>
-    * sudo nano /etc/asterisk/asterisk.conf
-        * runuser = asterisk ; The user to run as.
-        * rungroup = asterisk ; The group to run as.<br>
+  >  sudo nano /etc/asterisk/asterisk.conf
+    * runuser = asterisk ; The user to run as.
+    * rungroup = asterisk ; The group to run as.<br>
 ![Screenshot from 2025-04-17 13-19-24](https://github.com/user-attachments/assets/60ceeb26-311f-4961-9198-b166a8866b01)<br>
         Save and close the file (press ctrl+x then y)<br>
 * Restart and enable the Asterisk service:<br>
-    * sudo systemctl restart asterisk
-    * sudo systemctl enable asterisk<br>
+  >  sudo systemctl restart asterisk
+  >  sudo systemctl enable asterisk<br>
 * Verify status of Asterisk service:<br>
-    * sudo systemctl status asterisk
+  >  sudo systemctl status asterisk
 * Open Asterisk command-line interface:
-    * sudo asterisk -rvvv<br>
+  >  sudo asterisk -rvvv<br>
+
 ![Screenshot from 2025-04-17 13-25-32](https://github.com/user-attachments/assets/7c7455ea-f874-44db-ac22-c0248e1222a4)<br>
     Varify version 21.7.0
 * Exit CLI:
@@ -91,30 +92,30 @@ Asterisk is an open source  platform for creating communications servers. Asteri
 
 
 ## 3. Introduction of FreePBX
-FreePBX is an open source platform. FreePBX is a web-based, open-source graphical user interface (GUI) that use to manages Asterisk. It simplifies the process of setting up and managing Asterisk, enabling users to build a communication system for their organization. 
+[FreePBX](https://www.freepbx.org/) is an open source platform. FreePBX is a web-based, open-source graphical user interface (GUI) that use to manages Asterisk. It simplifies the process of setting up and managing Asterisk, enabling users to build a communication system for their organization. 
 
 ### 3.1. Setup FreePBX
 * Install Required Dependencies:
-    * sudo apt install software-properties-common
-    * sudo add-apt-repository ppa:ondrej/php -y
+  >  sudo apt install software-properties-common
+  >  sudo add-apt-repository ppa:ondrej/php -y
 * Install Apache, MariaDB, PHP
-    * sudo apt-get install -y apache2 mariadb-server mariadb-client bison flex \
+  >  sudo apt-get install -y apache2 mariadb-server mariadb-client bison flex \
 php8.2 php8.2-curl php8.2-cli php8.2-common php8.2-mysql php8.2-gd \
 php8.2-mbstring php8.2-intl php8.2-xml php-pear
 * Download version 17:
-    * sudo wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-17.0-latest.tgz
-    * sudo tar -xvzf freepbx-16.0-latest.tgz
-    * cd freepbx
+  >  sudo wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-17.0-latest.tgz
+  >  sudo tar -xvzf freepbx-16.0-latest.tgz
+  >  cd freepbx
 * Install Node.js package
-    * sudo apt-get install nodejs npm -y
-    * sudo ./install -n
+  >  sudo apt-get install nodejs npm -y
+  >  sudo ./install -n
 * Get the following output<br><br>
     ![Screenshot from 2025-04-17 13-33-53](https://github.com/user-attachments/assets/63590429-4f9e-4471-aede-346e62723718)<br><br>
 * Install the pm2 package 
-    * sudo fwconsole ma install pm2
+  >  sudo fwconsole ma install pm2
 * Enable the Apache
-    * sudo a2enmod rewrite
-    * sudo systemctl restart apache2
+  >  sudo a2enmod rewrite
+  >  sudo systemctl restart apache2
 ### Access FreePBX
 * Now, open your web browser and access the FreePBX web interface using the URL http://your-server-ip/admin<br><br>
 ![image](https://github.com/user-attachments/assets/ddce947f-9612-403a-a61e-c93c560fbd15)<br>
@@ -131,12 +132,12 @@ Provide your Admin user details and click on the Setup System button.<br>
 
 ## 4. Basic calling set-up with Asterisk
 * Some Asterisk Firewall Rules
-   * sudo iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
-   * sudo   iptables -A INPUT -p udp -m udp --dport 5036 -j ACCEPT
-   * sudo   iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
+  >  sudo iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
+  >  sudo   iptables -A INPUT -p udp -m udp --dport 5036 -j ACCEPT
+  >  sudo   iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 * set our configs
-   * cd /etc/asterisk
-   * sudo nano pjsip_custom.conf(This file should be empty, enter this code.)
+  >  cd /etc/asterisk
+  >  sudo nano pjsip_custom.conf(This file should be empty, enter this code.)
  
            ;================================ TRANSPORTS ==
            ; Our primary transport definition for UDP communication behind NAT.
@@ -187,10 +188,10 @@ Provide your Admin user details and click on the Setup System button.<br>
            username = 7100
          
            [7100](aor-single-reg)
-    <br> ![Screenshot from 2025-04-17 14-15-36](https://github.com/user-attachments/assets/4c3d5767-e928-46ed-b541-03bf9b97baae)<br>
+
 
 * Open extensions_custom.conf(This file should be empty, enter this code.)
-   * sudo nano extensions_custom.conf
+  >  sudo nano extensions_custom.conf
 
               [globals]
            INTERNAL_DIAL_OPT=,30
@@ -263,7 +264,7 @@ now we have 3 calling numbers(7000,7100,8000). We can communicate with all three
 
 
 
-## 8. Setup a IVR using FreePBX
+## 8. Setup a [IVR](https://en.wikipedia.org/wiki/Interactive_voice_response) using FreePBX
 * First we need some recording. Click Admin -> System Redording -> Add Recording. Enter Name and Browse Recording and click Submit -> Apply config.<br><br>
   ![Screenshot from 2025-04-17 15-45-24](https://github.com/user-attachments/assets/b045cc72-383f-4032-94ff-1daf3a34a3cd)<br>
 
