@@ -1,0 +1,28 @@
+
+
+if error related to ioncube loader
+
+check php -v first note version(8.2)
+
+now run update-alternatives --display php
+
+if there is any other version is displayed then remove other then 8.2
+
+and follow https://www.youtube.com/watch?v=Bp5ce9-LQKg to install ioncube loder (in php 8.2 loader file location is /etc/php/8.2/apache2/php.ini not /etc/php.ini )
+
+
+Less_Exception_Parser
+Less.php cache directory isn't writable: /var/www/html/admin/assets/less/cache/
+(any Permissions error )
+command:   sudo fwconsole chown --verbose --
+
+
+
+how to install ioncube loader
+php -i | grep extension_dir
+sudo cp ioncube/ioncube_loader_lin_8.2.so /usr/lib/php/20190902/
+zend_extension = /usr/lib/php/20190902/ioncube_loader_lin_8.2.so
+sudo systemctl restart apache2
+sudo systemctl restart php8.2-fpm
+
+
