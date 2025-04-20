@@ -1,6 +1,8 @@
 
 
 # VoIP Setup using Asterisk & FreePBX
+This guide provides how to set up a Voice over Internet Protocol (VoIP) system using [Asterisk](#2-introduction-of-asterisk) and [FreePBX](#3-introduction-of-freepbx).
+
 ## 1. Introduction of VoIP
 
 [Voice over Internet Protocol](https://www.geeksforgeeks.org/voice-over-internet-protocol-voip/) (VoIP) is a technology that allows us to make calls using a Internet connection instead of a regular phone line. It converts analog voice signals into digital then data packets, which are transmitted over an IP network.
@@ -27,7 +29,11 @@
 - **Flexibility**: You can make and receive calls from anywhere with an Internet connection.
 - **Scalability**: It’s easy to add or remove lines as your business grows or changes.
 - **Advanced Features**: VoIP systems often include features like call forwarding, voicemail-to-email, auto-attendant, and more
-## 2. Introduction of Astrisk
+
+
+
+
+# 2. Introduction Of Asterisk
 [Asterisk](https://www.asterisk.org/get-started/) is an open source  platform for creating communications servers. Asterisk have IP PBX systems, VoIP gateways. It can be used by small businesses, large businesses, call centers, carriers and government agencies, worldwide. Asterisk is free and open source. Asterisk is created by Sangoma. Today, more than one million Asterisk-based communications systems in use, in more than 170 countries.
 
 ### 2.1 Setup Asterisk<br> 
