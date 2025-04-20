@@ -1,7 +1,9 @@
 
 
 # VoIP Setup using Asterisk & FreePBX
-This guide provides how to set up a Voice over Internet Protocol (VoIP) system using [Asterisk](#2-introduction-of-asterisk) and [FreePBX](#3-introduction-of-freepbx).
+This guide provides how to set up a Voice over Internet Protocol (VoIP) system using [Asterisk](#2-introduction-of-asterisk),a open-source framework for building communications applications, and [FreePBX](#3-introduction-of-freepbx)., a user-friendly web interface that use manage Asterisk. Together, they create VoIP solution that can be meet various communication needs.
+
+
 
 ## 1. Introduction of VoIP
 
