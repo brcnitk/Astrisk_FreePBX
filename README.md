@@ -44,7 +44,8 @@ This guide provides how to set up a Voice over Internet Protocol (VoIP) system u
 
   >  sudo apt update <br> 
   >  sudo apt upgrade<br> 
-  >  sudo apt-get install unzip git sox gnupg2 curl libnewt-dev libssl-dev libncurses5-dev subversion libsqlite3-dev build-essential libjansson-dev libxml2-dev libedit-dev uuid-dev subversion -y<br> (https://www.atlantic.net/vps-hosting/how-to-install-asterisk-and-freepbx-on-ubuntu/)
+  >  sudo apt-get install unzip git sox gnupg2 curl libnewt-dev libssl-dev libncurses5-dev subversion libsqlite3-dev build-essential libjansson-dev libxml2-dev libedit-dev uuid-dev subversion -y<br>
+  For more details, visit:(https://www.atlantic.net/vps-hosting/how-to-install-asterisk-and-freepbx-on-ubuntu/)
 
 #### Step 2 – Install Asterisk
 * Download version 21:
