@@ -260,7 +260,7 @@ Will see green in SIP UDP, and click next.<br><br>
 
 ## 7. Basic calling set-up with FreePBX<br>
 
-* Before Setup Update FreePBX. Go FreePBX GUI click Admin -> Module Admin. Then select all 4 repositories(Standard, Unsupported, Extended, Commercial). Then Click Check Online Then Download all then Upgrade all then process and at last apply config<br>
+* Before Setup Update FreePBX. Go FreePBX GUI click Admin -> Module Admin. Then select all 4 repositories(Standard, Unsupported, Extended, Commercial). Then Click Check Online -> Download all -> Upgrade all -> process -> apply config<br>
 
 ![Screenshot from 2025-04-17 15-27-41](https://github.com/user-attachments/assets/2ed4ddf3-8edd-4397-b98a-77c8e84c254f)<br>
 ### calling set-up<br>
