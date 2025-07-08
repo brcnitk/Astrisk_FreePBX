@@ -50,31 +50,31 @@ This guide provides how to set up a Voice over Internet Protocol (VoIP) system u
 #### Step 2 – Install Asterisk
 * Download version 21:
   >  cd /usr/src <br>
-  >  sudo wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-21-current.tar.gz
-  >  sudo tar xvf asterisk-21-current.tar.gz
+  >  sudo wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-21-current.tar.gz<br>
+  >  sudo tar xvf asterisk-21-current.tar.gz<br>
   >  cd asterisk-21*/<br>
 * Some require dependencies:
-  >  sudo contrib/scripts/get_mp3_source.sh
+  >  sudo contrib/scripts/get_mp3_source.sh<br>
   >  sudo contrib/scripts/install_prereq install<br>
 * Next, configure Asterisk:<br>
-  >  sudo ./configure
-  >  sudo make -j2
-  >  sudo make install
-  >  sudo make samples
-  >  sudo make config
-  >  sudo ldconfig
+  >  sudo ./configure<br>
+  >  sudo make -j2<br>
+  >  sudo make install<br>
+  >  sudo make samples<br>
+  >  sudo make config<br>
+  >  sudo ldconfig<br>
 #### Step 3 – Configure Asterisk
 * Create a separate user and group for Asterisk.<br>
-  >  sudo groupadd asterisk
+  >  sudo groupadd asterisk<br>
   >  sudo useradd -r -d /var/lib/asterisk -g asterisk asterisk<br>
 * Add required users to the Asterisk group:<br>
   >  sudo usermod -aG audio,dialout asterisk<br>
 * Set permissions:<br>
-  >  sudo chown -R asterisk.asterisk /etc/asterisk
-  >  sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk
+  >  sudo chown -R asterisk.asterisk /etc/asterisk<br>
+  >  sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk<br>
   >  sudo chown -R asterisk.asterisk /usr/lib/asterisk<br>
 * Edit /etc/default/asterisk file:<br>
-  >  sudo nano /etc/default/asterisk    
+  >  sudo nano /etc/default/asterisk   
     *   AST_USER="asterisk"
     *   AST_GROUP="asterisk"<br>
 ![Screenshot from 2025-04-17 12-14-16](https://github.com/user-attachments/assets/86ac5fa3-feaf-4acb-a67c-fbf38e8ce1d1)<br>
@@ -86,7 +86,7 @@ This guide provides how to set up a Voice over Internet Protocol (VoIP) system u
 ![Screenshot from 2025-04-17 13-19-24](https://github.com/user-attachments/assets/60ceeb26-311f-4961-9198-b166a8866b01)<br>
         Save and close the file (press ctrl+x then y)<br>
 * Restart and enable the Asterisk service:<br>
-  >  sudo systemctl restart asterisk
+  >  sudo systemctl restart asterisk<br>
   >  sudo systemctl enable asterisk<br>
 * Verify status of Asterisk service:<br>
   >  sudo systemctl status asterisk
@@ -105,25 +105,25 @@ This guide provides how to set up a Voice over Internet Protocol (VoIP) system u
 
 ### 3.1. Setup FreePBX
 * Install Required Dependencies:
-  >  sudo apt install software-properties-common
+  >  sudo apt install software-properties-common<br>
   >  sudo add-apt-repository ppa:ondrej/php -y
 * Install Apache, MariaDB, PHP
   >  sudo apt-get install -y apache2 mariadb-server mariadb-client bison flex \
 php8.2 php8.2-curl php8.2-cli php8.2-common php8.2-mysql php8.2-gd \
 php8.2-mbstring php8.2-intl php8.2-xml php-pear
 * Download version 17:
-  >  sudo wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-17.0-latest.tgz
-  >  sudo tar -xvzf freepbx-16.0-latest.tgz
+  >  sudo wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-17.0-latest.tgz<br>
+  >  sudo tar -xvzf freepbx-16.0-latest.tgz<br>
   >  cd freepbx
 * Install Node.js package
-  >  sudo apt-get install nodejs npm -y
+  >  sudo apt-get install nodejs npm -y<br>
   >  sudo ./install -n
 * Get the following output<br><br>
     ![Screenshot from 2025-04-17 13-33-53](https://github.com/user-attachments/assets/63590429-4f9e-4471-aede-346e62723718)<br><br>
 * Install the pm2 package 
   >  sudo fwconsole ma install pm2
 * Enable the Apache
-  >  sudo a2enmod rewrite
+  >  sudo a2enmod rewrite<br>
   >  sudo systemctl restart apache2
 ### Access FreePBX
 * Now, open your web browser and access the FreePBX web interface using the URL http://your-server-ip/admin<br><br>
@@ -141,90 +141,87 @@ Provide your Admin user details and click on the Setup System button.<br>
 
 ## 4. Basic calling set-up with Asterisk
 * Some Asterisk Firewall Rules
-  >  sudo iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
-  >  sudo   iptables -A INPUT -p udp -m udp --dport 5036 -j ACCEPT
+  >  sudo iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT<br>
+  >  sudo   iptables -A INPUT -p udp -m udp --dport 5036 -j ACCEPT<br>
   >  sudo   iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
 * set our configs
   >  cd /etc/asterisk
   >  sudo nano [pjsip_custom.conf](https://github.com/brcnitk/Astrisk_FreePBX/blob/main/conf%20files/pjsip_custom.conf)(This file should be empty, enter this code.)
  
            ;================================ TRANSPORTS ==
-           ; Our primary transport definition for UDP communication behind NAT.
-           [transport-udp-nat]
-           type = transport
-           protocol = udp
-           bind = 0.0.0.0
-           ;================================ CONFIG FOR SIP ITSP ==
-         
-           [calling](!)                    ; template
-           type=endpoint                   ; specify the below are the configurations related to an endpoint (a device)
-           context=interaction             ; *** it refers to the context set in the dialplan (extensions.conf) ***
-           allow = !all, ulaw, alaw  ; do not allow all codecs and only allow audio codecs - ulaw and alaw
-           direct_media=no                   ; do not allow two devices directly talking to each other
-           trust_id_outbound=yes
-           rtp_symmetric=yes
-           force_rport=yes
-           rewrite_contact=yes
-           device_state_busy_at=1
-           dtmf_mode=rfc4733
-
-           [auth-userpass](!)            ; template 
-           type = auth                       ; specify the below are the configurations related to authentication
-           auth_type = userpass      ; specify the type of the authentication is based on username and password
-         
-           [aor-single-reg](!)           ; template
-           type = aor
-           max_contacts = 1            ; specify the maximum sip addresses allocated. Here, that means each sip address could only connect to one device.
-         
-           [7000](calling)                 ; endpoint 7000 inherits the settings in calling template
-           auth=7000                       ; authentication = 7000
-           aors=7000                       ; address of record = 7000
-           callerid = 7000 <7000>      ; caller's id = 7000
-         
-           [7000](auth-userpass)     ; account creation for endpoint 7000
-           password = 7000
-           username = 7000
-         
-           [7000](aor-single-reg)
-         
-           [7100](calling)
-           auth=7100
-           aors=7100
-           callerid = 7100 <7100>
-         
-           [7100](auth-userpass)
-           password = 7100
-           username = 7100
-         
-           [7100](aor-single-reg)
-
+  ; Our primary transport definition for UDP communication behind NAT.
+  [transport-udp-nat]
+  type = transport
+  protocol = udp
+  bind = 0.0.0.0
+                  ;================================ CONFIG FOR SIP ITSP ==
+                
+                  [calling](!)                    ; template
+                  type=endpoint                   ; specify the below are the configurations related to an endpoint (a device)
+                  context=from-internal             ; * it refers to the context set in the dialplan (extensions.conf) *
+                  allow = !all, ulaw, alaw  ; do not allow all codecs and only allow audio codecs - ulaw and alaw
+                  direct_media=no                   ; do not allow two devices directly talking to each other
+                  trust_id_outbound=yes
+                  rtp_symmetric=yes
+                  force_rport=yes
+                  rewrite_contact=yes
+                  device_state_busy_at=1
+                  dtmf_mode=rfc4733
+                
+                  [auth-userpass](!)            ; template
+                  type = auth                       ; specify the below are the configurations related to authentication
+                  auth_type = userpass      ; specify the type of the authentication is based on username and password
+                
+                  [aor-single-reg](!)           ; template
+                  type = aor
+                  max_contacts = 1            ; specify the maximum sip addresses allocated. Here, that means each sip address could only connect to one device.
+                
+                  [7000](calling)                 ; endpoint 7000 inherits the settings in calling template
+                  auth=7000                       ; authentication = 7000
+                  aors=7000                       ; address of record = 7000
+                  callerid = 7000 <7000>      ; caller's id = 7000
+                
+                  [7000](auth-userpass)     ; account creation for endpoint 7000
+                  password = 7000
+                  username = 7000
+                
+                  [7000](aor-single-reg)
+                
+                  [7100](calling)
+                  auth=7100
+                  aors=7100
+                  callerid = 7100 <7100>
+                
+                  [7100](auth-userpass)
+                  password = 7100
+                  username = 7100
+                
+                  [7100](aor-single-reg)
 
 * Open [extensions_custom.conf](https://github.com/brcnitk/Astrisk_FreePBX/blob/main/conf%20files/extensions_custom.conf)(This file should be empty, enter this code.)
   >  sudo nano extensions_custom.conf
 
-              [globals]
-           INTERNAL_DIAL_OPT=,30
-         
-           [interaction]                       ; refers to the `context=interaction` in calling template in pjsip.conf
-           exten = 7000,1,Answer()               ; the first argument 7000 refers to the number you dial on your softphone. 
-           same = n,Dial(PJSIP/7000,60)      ; PJSIP/7000 refers to the endpoint 7000 , 60 means waiting for 60 seconds
-           same = n,Playback(vm-nobodyavail)
-           same = n,Voicemail(7000@main)
-           same = n,Hangup()
-         
-           exten = 7100,1,Answer()
-           same = n,Dial(PJSIP/7100,60)
-           same = n,Playback(vm-nobodyavail)
-           same = n,Voicemail(7000@main)
-           same = n,Hangup()
-         
-           ; same means following the same extension
-           ; n means the next action. 
-     
-      <br>![Screenshot from 2025-04-17 14-15-54](https://github.com/user-attachments/assets/a758dd1d-ddc2-4b72-9677-2016cd3e3fc9)<br>
-
-      Now we have 2 Account(7000,7100). We need to set up Softphones.
-
+             [globals]
+            INTERNAL_DIAL_OPT=,30
+          
+            [from-internal]                       ; refers to the context=interaction in calling template in pjsip.conf
+            exten = 7000,1,Answer()               ; the first argument 7000 refers to the number you dial on your softphone.
+            same = n,Dial(PJSIP/7000,60)      ; PJSIP/7000 refers to the endpoint 7000 , 60 means waiting for 60 seconds
+            same = n,Playback(vm-nobodyavail)
+            same = n,Voicemail(7000@main)
+            same = n,Hangup()
+          
+            exten = 7100,1,Answer()
+            same = n,Dial(PJSIP/7100,60)
+            same = n,Playback(vm-nobodyavail)
+            same = n,Voicemail(7000@main)
+            same = n,Hangup()
+          
+          
+          
+            ; same means following the same extension
+            ; n means the next action.
+          
 
 
 
